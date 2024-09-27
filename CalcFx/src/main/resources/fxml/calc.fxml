@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxWidth="1.7976931348623157E308" prefHeight="400.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.calcfx.control.CalcControl">
+<VBox maxWidth="1.7976931348623157E308" prefHeight="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.edu.upeu.calcfx.control.CalcControl">
    <children>
       <HBox maxWidth="1.7976931348623157E308" prefHeight="377.0">
          <children>
@@ -95,6 +95,7 @@
                         </GridPane>
                      </children>
                   </VBox>
+                  <Label layoutX="81.0" layoutY="346.0" text="Omar Ronaldo Mamani Pampa " />
                </children>
             </Pane>
             <AnchorPane prefHeight="200.0">
@@ -108,8 +109,8 @@
                         <TableColumn fx:id="cOpc" minWidth="20.0" prefWidth="75.0" text="Opciones" />
                     </columns>
                   </TableView>
-                  <Button layoutX="28.0" onAction="#iniciar" layoutY="258.0" mnemonicParsing="false" text="Iniciar" />
-                  <Button layoutX="114.0" onAction="#anular" layoutY="258.0" mnemonicParsing="false" text="Anular" />
+                  <Button layoutX="28.0" layoutY="258.0" mnemonicParsing="false" onAction="#iniciar" text="Iniciar" />
+                  <Button layoutX="114.0" layoutY="258.0" mnemonicParsing="false" onAction="#anular" text="Anular" />
                </children></AnchorPane>
          </children>
       </HBox>
