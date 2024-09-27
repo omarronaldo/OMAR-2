@@ -49,6 +49,7 @@ public class CalcControl {
 
     @FXML
     public void initialize() {
+        anular();
     }
  int t=0;
 
@@ -71,7 +72,7 @@ public class CalcControl {
                 }
 
             }break;
-            case "btnSum", "btnMul", "btnRest", "btnDiv", "btnRaiz","btnPi":{
+            case "btnSum", "btnMul", "btnRest", "btnDiv":{
                 operador(button.getText());
             }break;
             case "btnIgual":{
@@ -97,43 +98,21 @@ public class CalcControl {
         String[] valores=txtResultado.getText().split(" ");
         double val1=Double.parseDouble(String.valueOf(valores[0]));
         double val2=Double.parseDouble(String.valueOf(valores[2]));
-        switch (valores[1]) {
-            case "+": {
-                txtResultado.setText(String.valueOf(val1 + val2));
-            }
-            break;
-            case "-": {
-                txtResultado.setText(String.valueOf(val1 - val2));
-            }
-            break;
-            case "/": {
-                txtResultado.setText(String.valueOf(val1 / val2));
-            }
-            break;
-            case "*": {
-                txtResultado.setText(String.valueOf(val1 * val2));
-
-            }
-            break;
-            case "√":
-                if (val1 >= 0) {
-                    txtResultado.setText(String.valueOf(Math.sqrt(val1)));
-
-                }
-                else {
-                    txtResultado.setText("Error: Número negativo");
-                    return;
-                }
-
+        switch (valores[1]){
+            case "+":{txtResultado.setText(String.valueOf(val1+val2));}break;
+            case "-":{txtResultado.setText(String.valueOf(val1-val2));}break;
+            case "/":{txtResultado.setText(String.valueOf(val1/val2));}break;
+            case "*":{txtResultado.setText(String.valueOf(val1*val2));}break;
         }
 
         CalcTO to=new CalcTO();
+        to.setId(Long.parseLong(String.valueOf(indexEdit)));
         to.setNum1(String.valueOf(val1));
         to.setNum2(String.valueOf(val2));
         to.setOperador(valores[1].charAt(0));
         to.setResultado(String.valueOf(txtResultado.getText()));
         if(indexEdit!=-1){
-            serviceI.actualizarResultados(to, indexEdit);
+            serviceI.actualizarResultados(to, to.getId());
         }else{
             serviceI.guardarResultados(to);
         }
@@ -141,13 +120,13 @@ public class CalcControl {
         listaOper();
     }
 
-    private void editOperCalc(CalcTO cal, int index) {
+    private void editOperCalc(CalcTO cal, Long index) {
         System.out.println("Editing: " + cal.getNum1() + " Index:"+index);
         txtResultado.setText(cal.getNum1()+" "+cal.getOperador()+" "+cal.getNum2());
-        indexEdit=index;
+        indexEdit=index.intValue();
     }
 
-    private void deleteOperCalc(CalcTO cal, int index) {
+    private void deleteOperCalc(CalcTO cal, Long index) {
         System.out.println("Deleting: " + cal.getNum2());
         serviceI.eliminarResultados(index);
         listaOper();
@@ -165,13 +144,13 @@ public class CalcControl {
                 editButton.getStyleClass().setAll("btn", "btn-success");
                 editButton.setOnAction(event -> {
                     CalcTO cal = getTableView().getItems().get(getIndex());
-                    editOperCalc(cal, getIndex());
+                    editOperCalc(cal, cal.getId());
                 });
 
                 deleteButton.getStyleClass().setAll("btn", "btn-danger");
                 deleteButton.setOnAction(event -> {
                     CalcTO cal = getTableView().getItems().get(getIndex());
-                    deleteOperCalc(cal,getIndex());
+                    deleteOperCalc(cal,cal.getId());
                 });
             }
 
@@ -212,7 +191,7 @@ public class CalcControl {
         cOper.setCellValueFactory(new
                 PropertyValueFactory<>("Operador"));
         cOper.setCellFactory(ComboBoxTableCell.<CalcTO,
-                Character>forTableColumn('+', '-', '/', '*','√','π'));
+                Character>forTableColumn('+', '-', '/', '*'));
 
         cResult.setCellValueFactory(new PropertyValueFactory<CalcTO,
                 String>("Resultado"));
@@ -232,6 +211,21 @@ public class CalcControl {
 
         cOpc.prefWidthProperty().bind(tableView.widthProperty().multiply(0.25));
         tableView.setItems(calcTOList);
+    }
+    @FXML
+    public void iniciar(){
+        activaDesacticaB(false);
+    }
+
+    @FXML
+    public void anular(){
+        activaDesacticaB(true);
+    }
+
+    public void activaDesacticaB(boolean indi){
+        btn7.setDisable(indi);
+        btn8.setDisable(indi);
+        btn9.setDisable(indi);
     }
 
 }
