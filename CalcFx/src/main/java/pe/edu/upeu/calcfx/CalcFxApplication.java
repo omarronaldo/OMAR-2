@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.kordamp.bootstrapfx.BootstrapFX;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -34,7 +35,7 @@ public class CalcFxApplication extends Application {
 				builder.run(getParameters().getRaw().toArray(new String[0]));
 
 
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pe/edu/upeu/calcfx/modelo/calc.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/calc.fxml"));
 		fxmlLoader.setControllerFactory(configurableApplicationContext::getBean);
 		parent= fxmlLoader.load();
 	}
