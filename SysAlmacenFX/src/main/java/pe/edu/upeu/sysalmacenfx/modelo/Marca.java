@@ -20,4 +20,3 @@ public class Marca {
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 }
-
