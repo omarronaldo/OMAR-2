@@ -1,6 +1,7 @@
 package pe.edu.upeu.sysalmacenfx.dto;
 
 import lombok.Data;
+
 @Data
 public class SessionManager {
     static SessionManager instance;
