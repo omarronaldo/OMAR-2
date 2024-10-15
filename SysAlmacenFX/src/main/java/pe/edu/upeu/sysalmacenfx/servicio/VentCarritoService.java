@@ -2,31 +2,29 @@ package pe.edu.upeu.sysalmacenfx.servicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upeu.sysalmacenfx.modelo.Categoria;
-import pe.edu.upeu.sysalmacenfx.modelo.UnidadMedida;
-import pe.edu.upeu.sysalmacenfx.repositorio.CategoriaRepository;
-import pe.edu.upeu.sysalmacenfx.repositorio.UnidadMedidaRepository;
+import pe.edu.upeu.sysalmacenfx.modelo.VentCarrito;
+import pe.edu.upeu.sysalmacenfx.repositorio.VentCarritoRepository;
 
 import java.util.List;
 @Service
-public class UnidadMedidaService {
+public class VentCarritoService {
     @Autowired
-    UnidadMedidaRepository repo;
+    VentCarritoRepository repo;
 
     //C
-    public UnidadMedida save(UnidadMedida to){
+    public VentCarrito save(VentCarrito to){
         return repo.save(to);
     }
     //R
-    public List<UnidadMedida> List(){
+    public List<VentCarrito> List(){
         return repo.findAll();
     }
     //U
-    public UnidadMedida update(UnidadMedida to, Long id){
+    public VentCarrito update(VentCarrito to, Long id){
         try {
-            UnidadMedida toe=repo.findById(id).get();
+            VentCarrito toe=repo.findById(id).get();
             if(toe!=null) {
-                toe.setNombreMedida(to.getNombreMedida());
+                toe.setIdCarrito(to.getIdCarrito());
             }
             return repo.save(toe);
         }catch (Exception e){
@@ -34,7 +32,7 @@ public class UnidadMedidaService {
         }
         return null;
     }
-    public UnidadMedida update(UnidadMedida to){
+    public VentCarrito update(VentCarrito to){
         return repo.save(to);
     }
 
@@ -43,7 +41,7 @@ public class UnidadMedidaService {
         repo.deleteById(id);
     }
     //B
-    public UnidadMedida searchId(Long id){
+    public VentCarrito searchId(Long id){
         return repo.findById(id).get();
     }
 }

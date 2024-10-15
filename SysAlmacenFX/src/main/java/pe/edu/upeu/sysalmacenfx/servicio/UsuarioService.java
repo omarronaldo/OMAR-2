@@ -2,31 +2,29 @@ package pe.edu.upeu.sysalmacenfx.servicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upeu.sysalmacenfx.modelo.Categoria;
-import pe.edu.upeu.sysalmacenfx.modelo.UnidadMedida;
-import pe.edu.upeu.sysalmacenfx.repositorio.CategoriaRepository;
-import pe.edu.upeu.sysalmacenfx.repositorio.UnidadMedidaRepository;
+import pe.edu.upeu.sysalmacenfx.modelo.Usuario;
+import pe.edu.upeu.sysalmacenfx.repositorio.UsuarioRepository;
 
 import java.util.List;
 @Service
-public class UnidadMedidaService {
+public class UsuarioService {
     @Autowired
-    UnidadMedidaRepository repo;
+    UsuarioRepository repo;
 
     //C
-    public UnidadMedida save(UnidadMedida to){
+    public Usuario save(Usuario to){
         return repo.save(to);
     }
     //R
-    public List<UnidadMedida> List(){
+    public List<Usuario> List(){
         return repo.findAll();
     }
     //U
-    public UnidadMedida update(UnidadMedida to, Long id){
+    public Usuario update(Usuario to, Long id){
         try {
-            UnidadMedida toe=repo.findById(id).get();
+            Usuario toe=repo.findById(id).get();
             if(toe!=null) {
-                toe.setNombreMedida(to.getNombreMedida());
+                toe.setIdUsuario(to.getIdUsuario());
             }
             return repo.save(toe);
         }catch (Exception e){
@@ -34,7 +32,7 @@ public class UnidadMedidaService {
         }
         return null;
     }
-    public UnidadMedida update(UnidadMedida to){
+    public Usuario update(Usuario to){
         return repo.save(to);
     }
 
@@ -43,7 +41,7 @@ public class UnidadMedidaService {
         repo.deleteById(id);
     }
     //B
-    public UnidadMedida searchId(Long id){
+    public Usuario searchId(Long id){
         return repo.findById(id).get();
     }
 }

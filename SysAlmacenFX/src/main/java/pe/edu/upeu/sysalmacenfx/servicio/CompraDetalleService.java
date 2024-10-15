@@ -1,32 +1,31 @@
 package pe.edu.upeu.sysalmacenfx.servicio;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import pe.edu.upeu.sysalmacenfx.modelo.Categoria;
-import pe.edu.upeu.sysalmacenfx.modelo.UnidadMedida;
-import pe.edu.upeu.sysalmacenfx.repositorio.CategoriaRepository;
-import pe.edu.upeu.sysalmacenfx.repositorio.UnidadMedidaRepository;
+import pe.edu.upeu.sysalmacenfx.modelo.CompraDetalle;
+import pe.edu.upeu.sysalmacenfx.repositorio.CompraDetalleRepository;
 
 import java.util.List;
 @Service
-public class UnidadMedidaService {
+public class CompraDetalleService {
     @Autowired
-    UnidadMedidaRepository repo;
+    CompraDetalleRepository repo;
 
     //C
-    public UnidadMedida save(UnidadMedida to){
+    public CompraDetalle save(CompraDetalle to){
         return repo.save(to);
     }
     //R
-    public List<UnidadMedida> List(){
+    public List<CompraDetalle> List(){
         return repo.findAll();
     }
     //U
-    public UnidadMedida update(UnidadMedida to, Long id){
+    public CompraDetalle update(CompraDetalle to, Long id){
         try {
-            UnidadMedida toe=repo.findById(id).get();
+            CompraDetalle toe=repo.findById(id).get();
             if(toe!=null) {
-                toe.setNombreMedida(to.getNombreMedida());
+                toe.setIdCompraDetalle(to.getIdCompraDetalle());
             }
             return repo.save(toe);
         }catch (Exception e){
@@ -34,7 +33,7 @@ public class UnidadMedidaService {
         }
         return null;
     }
-    public UnidadMedida update(UnidadMedida to){
+    public CompraDetalle update(CompraDetalle to){
         return repo.save(to);
     }
 
@@ -43,7 +42,7 @@ public class UnidadMedidaService {
         repo.deleteById(id);
     }
     //B
-    public UnidadMedida searchId(Long id){
+    public CompraDetalle searchId(Long id){
         return repo.findById(id).get();
     }
 }
