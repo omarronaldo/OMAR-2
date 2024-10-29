@@ -1,6 +1,4 @@
-package pe.edu.upeu.sysalmacenfx.utils;
-
-import pe.edu.upeu.sysalmacenfx.SysAlmacenFxApplication;
+package pe.edu.upeu.sysalmacenfx;
 
 public class ApplicationMain {
     public static void main(String[] args) {
