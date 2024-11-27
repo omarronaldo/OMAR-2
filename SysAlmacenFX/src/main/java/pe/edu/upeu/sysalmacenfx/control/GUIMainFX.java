@@ -4,10 +4,12 @@ package pe.edu.upeu.sysalmacenfx.control;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -22,8 +24,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 import java.util.prefs.Preferences;
-
-
 
 @Component
 public class GUIMainFX {
@@ -41,15 +41,17 @@ public class GUIMainFX {
     private BorderPane bp;
     @FXML
     private MenuBar menuBarFx;
+
     private Parent parent;
     Stage stage;
+
     @FXML
     public void initialize() {
-
         Platform.runLater(() -> {
             stage = (Stage) tabPaneFx.getScene().getWindow();
             System.out.println("El título del stage es: " + stage.getTitle());
         });
+
         myresources = util.detectLanguage(userPrefs.get("IDIOMAX", "en"));
         mmiDao = new MenuMenuItemDao();
         String perf= SessionManager.getInstance().getNombrePerfil();
@@ -131,24 +133,6 @@ public class GUIMainFX {
                     throw new RuntimeException(ex);
                 }
             }
-            if (((MenuItem) e.getSource()).getId().equals("mimisalir")) {
-
-                try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
-                    fxmlLoader.setControllerFactory(context::getBean);
-                    parent = fxmlLoader.load();
-                    Scene scene = new Scene(parent);
-                    stage.sizeToScene();
-                    stage.setScene(scene);
-                    stage.centerOnScreen();
-                    stage.setTitle("SysAlmacen Spring Java-FX");
-                    stage.setResizable(false);
-                    stage.show();
-
-                } catch (Exception ex) {
-                    throw new RuntimeException();
-                }
-            }
 
             if(((MenuItem) e.getSource()).getId().equals("mimiautcomp")){
                 tabPaneFx.getTabs().clear();
@@ -164,6 +148,46 @@ public class GUIMainFX {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
+            }
+
+            if(((MenuItem) e.getSource()).getId().equals("mimiventa")){
+                tabPaneFx.getTabs().clear();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main_venta.fxml"));
+                loader.setControllerFactory(context::getBean);
+                Parent paneFromFXML;
+                try {
+                    paneFromFXML = loader.load(); // Cargar el contenido FXML
+                    ScrollPane dd= new ScrollPane(paneFromFXML);
+                    //mc.setContexto(ctx);
+                    Tab clienteTab = new Tab("Registro Venta",dd );
+                    tabPaneFx.getTabs().add(clienteTab);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+
+
+            if (((MenuItem) e.getSource()).getId().equals("mimisalir")) {
+
+                tabPaneFx.getTabs().clear();
+
+               try {
+                   FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/login.fxml"));
+                   fxmlLoader.setControllerFactory(context::getBean);
+                   parent= fxmlLoader.load();
+                   Scene scene = new Scene(parent); //Punto (1) Diana
+                   stage.sizeToScene();
+                   stage.setScene(scene);
+                   stage.centerOnScreen(); // Punto (1) Mary
+                   stage.setTitle("SysAlmacen Spring Java-FX");
+                   stage.setResizable(false); //Miael (0.8)
+                   stage.show();
+
+
+               }catch (Exception ex){
+                   throw new RuntimeException(ex);
+               }
+
             }
 
 

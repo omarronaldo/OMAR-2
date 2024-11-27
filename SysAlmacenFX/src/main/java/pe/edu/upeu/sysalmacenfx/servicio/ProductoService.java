@@ -1,7 +1,7 @@
 package pe.edu.upeu.sysalmacenfx.servicio;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upeu.sysalmacenfx.dto.ModeloDataAutocomplet;
@@ -10,6 +10,8 @@ import pe.edu.upeu.sysalmacenfx.repositorio.ProductoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class ProductoService {
@@ -61,5 +63,6 @@ public class ProductoService {
         }
         return listarProducto;
     }
+
 
 }
